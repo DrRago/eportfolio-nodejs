@@ -17,7 +17,7 @@ The database contains the collection `movie` with many movie entries. Have fun :
 ## Prerequisites
 * installed node.js
 * installed package manager providing express and mongodb 
-* the `app_task.js` file (in this repository in api-example)
+* the `app_task.js` file (in this repository in api-example) - I added some code snippets there
 * an editor
 * internet connection
 

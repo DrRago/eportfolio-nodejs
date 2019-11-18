@@ -17,7 +17,7 @@ const databaseName = "software_eng";
 /* the connection string */
 const url = `mongodb://${mongoUser}:${mongoPassword}@${mongoServer}:${mongoPort}/?authMechanism=DEFAULT&authSource=${databaseName}`;
 
-let mongoDB; // will hold the db connection
+let mongoDBCollection; // will hold the db connection
 
 /**
  * Perform the mongo connect and set the database variable
@@ -25,7 +25,7 @@ let mongoDB; // will hold the db connection
  */
 const mongoConnect = async () => {
     const client = await MongoClient.connect(url);
-    mongoDB = client.db(databaseName);
+    mongoDBCollection = client.db(databaseName).collection('movie');
     console.log('Successfully connected to mongo server')
 };
 
@@ -56,7 +56,7 @@ mongoConnect().catch(err => {
  * @param res the express result object
  */
 const getAllMoviesRoute = (req, res) => {
-    mongoDB.collection('movie').find().limit(50).toArray((err, movies) => {
+    mongoDBCollection.find().limit(50).toArray((err, movies) => {
         if (err) {
             throw err
         }
@@ -86,7 +86,7 @@ const getMovieRoute = (req, res) => {
 
     if (status === 200) {
         /* only request data if the id is valid */
-        mongoDB.collection('movie').findOne({_id: mongoID}, (err, movie) => {
+        mongoDBCollection.findOne({_id: mongoID}, (err, movie) => {
             if (err) {
                 throw err;
             }
@@ -127,7 +127,7 @@ const updateRoute = (req, res) => {
 
     if (status === 200) {
         /* only update data if the id is valid */
-        mongoDB.collection('movie').updateOne({_id: mongoID}, {$set: {original_title: req.params.newName}}, (err, updateInfo) => {
+        mongoDBCollection.updateOne({_id: mongoID}, {$set: {original_title: req.params.newName}}, (err, updateInfo) => {
             if (err) {
                 throw err;
             }

@@ -2,30 +2,30 @@
  * Created by Leonhard Gahr on 04.04.2017.
  */
 init();
+
 function init() {
-    var seperator = " - ";
+    const separator = " - ";
 
-    var headings = document.getElementsByClassName("heading-overview");
+    const headings = document.getElementsByClassName("heading-overview");
+    const body = document.getElementsByClassName("reveal")[0];
 
-    var reveal = document.getElementById("reveal");
+    const bodyChild = body.children[0];
 
-    var body = document.getElementsByClassName("reveal")[0];
-
-    var bodyChild = body.children[0];
-
-    var topicsElement = document.createElement("div");
+    const topicsElement = document.createElement("div");
     topicsElement.className = "topics";
 
-    var headElement = document.createElement("div");
+    const headElement = document.createElement("div");
     headElement.className = "head";
 
 
-    var textElements = getTextElements(headings, seperator, false);
+    const textElements = getTextElements(headings, separator, false);
 
     textElements.pop();
 
-    for (var index in textElements) {
-        headElement.insertBefore(textElements[index], headElement.nextSibling)
+    for (const index in textElements) {
+        if (textElements.hasOwnProperty(index)) {
+            headElement.insertBefore(textElements[index], headElement.nextSibling)
+        }
     }
 
     topicsElement.insertBefore(headElement, topicsElement.nextSibling);
@@ -44,17 +44,17 @@ function appendClass(element, newClass) {
 }
 
 function addRevealListener() {
-    var elements = document.getElementsByClassName("heading-overview");
-    var indices = [];
-    for (var i = 0; i < elements.length; i++) {
-        var slideIndices = Reveal.getIndices(elements[i].parentNode).h;
+    const elements = document.getElementsByClassName("heading-overview");
+    const indices = [];
+    for (let i = 0; i < elements.length; i++) {
+        const slideIndices = Reveal.getIndices(elements[i].parentNode).h;
         appendClass(document.getElementsByClassName("heading-preview")[i], slideIndices);
         indices.push(slideIndices);
     }
 
-    var recentElement;
+    let recentElement;
 
-    Reveal.addEventListener('slidechanged', function () {
+    Reveal.addEventListener('slidechanged', () => {
         if (Reveal.getCurrentSlide().classList.contains("no-heading-overview")) {
             document.getElementsByClassName("topics")[0].style.opacity = 0
         } else {
@@ -65,7 +65,7 @@ function addRevealListener() {
                 recentElement.classList.remove("active");
                 recentElement.classList.add("inactive")
             }
-            var element = document.getElementsByClassName("" + Reveal.getIndices().h)[0];
+            const element = document.getElementsByClassName("" + Reveal.getIndices().h)[0];
             recentElement = element;
             if (!element.classList.contains("active")) {
                 element.classList.remove("inactive");
@@ -79,6 +79,7 @@ function addRevealListener() {
         }
     });
 
+
     Reveal.addEventListener('overviewshown', function () {
         document.getElementsByClassName("topics")[0].style.opacity = 0
     });
@@ -90,14 +91,14 @@ function addRevealListener() {
 }
 
 function getTextElements(headings, seperator, noTag) {
-    var textElements = [];
+    const textElements = [];
 
-    for (var key in headings) {
+    for (const key in headings) {
         if (headings.hasOwnProperty(key) && headings[key].nodeType === 1) {
             if (noTag) {
-                textElements.push(headings[key].innerHTML.replace("\n", " "))
+                textElements.push(headings[key].getAttribute("data-heading-overview") || headings[key].innerHTML.replace("\n", " "))
             } else {
-                var element = document.createElement("h4");
+                const element = document.createElement("h4");
                 if (headings[key].getAttribute("data-heading-overview") !== null) {
                     element.innerText = headings[key].getAttribute("data-heading-overview");
                 } else {
@@ -105,10 +106,10 @@ function getTextElements(headings, seperator, noTag) {
                 }
                 element.className = headings[key].innerText.replace(" ", "").toLowerCase() + " heading-preview";
 
-                var seperatorElement = document.createElement("h4");
-                seperatorElement.innerText = seperator;
+                const separatorElement = document.createElement("h4");
+                separatorElement.innerText = seperator;
 
-                textElements.push(element, seperatorElement)
+                textElements.push(element, separatorElement)
             }
         }
     }
@@ -117,18 +118,20 @@ function getTextElements(headings, seperator, noTag) {
 }
 
 function generateTableOfContents() {
-    var table_slide = document.getElementsByClassName("table-of-contents")[0];
+    const table_slide = document.getElementsByClassName("table-of-contents")[0];
 
     if (table_slide === undefined) {
         return
     }
 
-    var textElements = getTextElements(document.getElementsByClassName("heading-overview"), "", true);
+    const textElements = getTextElements(document.getElementsByClassName("heading-overview"), "", true);
 
-    var list = document.createElement("ul");
+    const list = document.createElement("ul");
 
-    for (var i in textElements) {
-        list.innerHTML += "<li>" + textElements[i] + "</li>"
+    for (const i in textElements) {
+        if (textElements.hasOwnProperty(i)) {
+            list.innerHTML += "<li>" + textElements[i] + "</li>"
+        }
     }
 
     table_slide.innerHTML = "<" + table_slide.getAttribute("data-heading-tag") + ">" + table_slide.getAttribute("data-heading") + "</" + table_slide.getAttribute("data-heading-tag") + ">";

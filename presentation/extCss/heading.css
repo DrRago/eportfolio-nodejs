@@ -9,20 +9,23 @@
     transition: visibility 0s, opacity .5s linear;
     font-size: 30px !important;
 }
+
 .head h4 {
-    color: gray;
+    color: #6c757d;
     display: inline;
 }
+
 .head .active {
-    color: #000;
+    color: white;
     -webkit-transition: color 2s;
     -moz-transition: color 2s;
     -ms-transition: color 2s;
     -o-transition: color 2s;
     transition: color 2s
 }
+
 .head .inactive {
-    color: gray;
+    color: #6c757d;
     -webkit-transition: color 2s;
     -moz-transition: color 2s;
     -ms-transition: color 2s;

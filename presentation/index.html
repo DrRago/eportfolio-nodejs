@@ -54,22 +54,32 @@
             <section>
                 <h4>JavaScript - Advantages</h4>
                 <ul class="fragment">
-                    <li>Popularity</li>
-                    <li>Wide Community</li>
-                    <li>Speed</li>
-                    <li>Simplicity</li>
-                    <li>Interoperability</li>
-                    <li>Updates</li>
+                    <li>popularity</li>
+                    <li>wide Community</li>
+                    <li>speed</li>
+                    <li>simplicity</li>
+                    <li>interoperability</li>
+                    <li>updates</li>
                 </ul>
             </section>
 
             <section>
                 <h4>JavaScript - Disadvantages</h4>
                 <ul class="fragment">
-                    <li>Debugging</li>
-                    <li>Error catching</li>
-                    <li>Client can manipulate code</li>
-                    <li>Rely on clients browser engine and resources</li>
+                    <li>debugging</li>
+                    <li>
+                        client can manipulate code
+                        <ul>
+                            <li>security for client and/or server</li>
+                        </ul>
+                    </li>
+                    <li>
+                        rely on clients browser engine and resources
+                        <ul>
+                            <li>browser support</li>
+                            <li>browser tolerance different</li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
 
@@ -105,7 +115,7 @@
                     <li>cross-platform (V8 engine)</li>
                     <li>asynchronous and event driven</li>
                     <li>single threaded</li>
-                    <li>Open source (MIT)</li>
+                    <li>open source (MIT)</li>
                 </ul>
                 <div class="fragment">
                     <hr>
@@ -289,7 +299,8 @@ MongoClient.connect(url, (err, client) => {
             <section>
                 <h4>Weaknesses</h4>
                 <ul>
-                    <li>All JavaScript disadvantages mentioned</li>
+                    <li>All JavaScript disadvantages mentioned<small style="vertical-align: baseline; color: #6c757d">
+                        except clients</small></li>
                     <li>Version changes may be backwards-incompatible</li>
                     <li><strong class="fragment highlight-red">ANYONE</strong> can publish a library to npm</li>
                     <li>node.js is single-threaded</li>
@@ -312,6 +323,20 @@ MongoClient.connect(url, (err, client) => {
                     <li class="fragment">Advantages outskill the disadvantages</li>
                 </ul>
             </section>
+        </section>
+
+        <section>
+            <section>
+                <h2 class="heading-overview">The Task</h2>
+            </section>
+            <section>
+                See markdown file in my <a href="https://gitlab.tandashi.de/DHBW/nodejs-eportfolio/blob/master/task.md">repository</a>
+            </section>
+        </section>
+
+        <section class="no-heading-overview">
+            <h2>Thank you for your attention</h2>
+            <small>Do you have questions?</small>
         </section>
     </div>
 </div>
@@ -420,7 +445,7 @@ MongoClient.connect(url, (err, client) => {
         // - null: Media will only autoplay if data-autoplay is present
         // - true: All media will autoplay, regardless of individual setting
         // - false: No media will autoplay, regardless of individual setting
-        autoPlayMedia: true,
+        autoPlayMedia: false,
 
         // Number of milliseconds between automatically proceeding to the
         // next slide, disabled when set to 0, this value can be overwritten

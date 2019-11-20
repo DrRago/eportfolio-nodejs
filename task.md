@@ -6,7 +6,7 @@ The task is to create a little RESTful API in node.js. The API should meet the f
 | ----- | ------ | ----------- |
 | /movie/| GET | Get the first 50 movies of the database|
 | /movie/:movieID| GET | Get the movie with the ID provided or an useful error message|
-| /movie/:movieID/set/:newName| (PUT) [may be GET, it's easier to test] | update the name of one movie and return a useful response (error and success)|
+| /movie/:movieID/set/:newName| (POST) [may be GET, it's easier to test] | update the name of one movie and return a useful response (error and success)|
 
 As you can see you shall use a database to get the data. There is a mongodb instance running on `drrago.de:21`, with the name `software_eng` and the credentials:  
 `username`: `tinf18`  
